@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Login</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Login to University System</h2>
+
+        <div class="toggle-buttons">
+            <button onclick="showForm('admin')">Admin Login</button>
+            <button onclick="showForm('student')">Student Login</button>
+        </div>
+
+        <!-- Admin Login Form -->
+        <form id="adminLoginForm" class="login-form">
+            <input type="text" id="adminUsername" placeholder="Admin Username" required>
+            <input type="password" id="adminPassword" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Student Login Form -->
+        <form id="studentLoginForm" class="login-form hidden">
+            <input type="text" id="studentRollNumber" placeholder="Roll Number" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script src="./js/common.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>
