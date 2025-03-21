@@ -103,4 +103,27 @@ async function getCourseById(req, res) {
     }
 }
 
-module.exports = { createCourse, updateCourse, deleteCourse, getCourseById, getAllCourses };
+async function subscribeCourseNotification(req, res) {
+    try {
+        const course = await Course.findById(req.params.id);
+
+        if (!course) {
+            return res.status(404).json({ success: false, error: 'Course not found' });
+        }
+
+        // Check if user is already subscribed
+        if (course.subscribers.includes(req.Student._id)) {
+            return res.status(400).json({ success: false, error: 'Already subscribed to this course' });
+        }
+
+        // Add user to subscribers
+        course.subscribers.push(req.Student._id);
+        await course.save();
+
+        res.json({ success: true, message: 'Subscribed to course successfully' });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+module.exports = { createCourse, updateCourse, deleteCourse, getCourseById, getAllCourses, subscribeCourseNotification };

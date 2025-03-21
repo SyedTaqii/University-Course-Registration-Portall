@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const CourseController = require('../../controllers/course_controller');
-const { protectAdmin, admin } = require('../../middleware/authenticate');
+const { protectAdmin, protectStudent, admin } = require('../../middleware/authenticate');
 
 // Get all courses / create new course
 router.route('/')
@@ -15,6 +15,6 @@ router.route('/:id')
     .delete(protectAdmin, admin, CourseController.deleteCourse);
 
 // Subscribe to course notifications
-// router.post('/:id/subscribe', protect, courseController.subscribeToCourse);
+router.post('/:id/subscribe', protectStudent, CourseController.subscribeCourseNotification);
 
 module.exports = router;

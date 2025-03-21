@@ -48,7 +48,11 @@ const courseSchema = new mongoose.Schema({
     prerequisites: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'courses'
-    }]
+    }],
+    subscribers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
 });
 
 module.exports = mongoose.model('courses', courseSchema);

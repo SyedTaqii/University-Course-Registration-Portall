@@ -60,7 +60,15 @@ async function registerCourse(req, res) {
         course.availableSeats -= 1;
         await course.save();
 
-        // Add the registration to the student's registered courses
+        // Notify subscribers if this was the last seat
+        if (course.availableSeats === 0 && course.subscribers.length > 0) {
+            course.subscribers.forEach(subscriber => {
+                console.log(`Notification sent to subscriber: ${subscriber.email}`);
+            });
+            course.subscribers = [];
+            await course.save();
+        }
+
         student.registeredCourses.push(registration._id);
         await student.save();
 
